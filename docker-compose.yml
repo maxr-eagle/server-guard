@@ -1,0 +1,33 @@
+volumes:
+  HNG-nginx-logs:
+
+services:
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - HNG-nginx-logs:/var/log/nginx
+    depends_on:
+      - nextcloud
+    restart: unless-stopped
+
+  nextcloud:
+    image: kefaslungu/hng-nextcloud
+    expose:
+      - "80"
+    volumes:
+      - HNG-nginx-logs:/var/log/nginx:ro             # can see logs, read-only
+    restart: unless-stopped
+
+  detector:
+    build: ./detector                                # builds from our Dockerfile
+    volumes:
+      - HNG-nginx-logs:/var/log/nginx:ro             # reads logs, read-only
+    cap_add:
+      - NET_ADMIN                                    # needed for iptables
+      - NET_RAW
+    network_mode: host                               # iptables affects the real server
+    restart: unless-stopped

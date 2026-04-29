@@ -1,0 +1,21 @@
+log_path: /var/log/nginx/hng-access.log
+audit_log_path: /var/log/detector/audit.log
+window_seconds: 60
+baseline_window_minutes: 30
+baseline_recalc_interval: 60
+baseline_min_data_points: 10
+baseline_floor: 1.0
+z_score_threshold: 3.0
+rate_multiplier: 5
+error_rate_multiplier: 3
+error_surge_z_score: 1.5
+unban_schedule:
+  - 10
+  - 30
+  - 120
+slack_webhook_url: "https://hooks.slack.com/services/YOUR/WEBHOOK/URL"
+dashboard_port: 8080
+dashboard_refresh_seconds: 3
+whitelist:
+  - "YOUR_IP_HERE"
+  - "127.0.0.1"
