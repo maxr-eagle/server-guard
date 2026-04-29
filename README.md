@@ -158,7 +158,7 @@ Live metrics at http://63.178.11.202:8080 — refreshes every 3 seconds:
 ---
 
 ## Blog Post
-[Link to be added after publishing]
+https://medium.com/@grantmaxdev/how-i-built-a-ddos-detection-engine-from-scratch-71a9cbc42b91
 
 ---
 
